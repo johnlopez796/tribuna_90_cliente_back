@@ -30,8 +30,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("DOCUMENTACION API ARBOL BINARIO ")
-                .description("Creación arbol binario y busqueda de ancestro más cercano")
+                .title("DOCUMENTACION SERVICIO CLIENTE ")
+                .description("Operaciones cliente")
                 .build();
     }
 }

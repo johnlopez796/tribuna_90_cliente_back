@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Getter
 public class AppConfig {
-    @Value("${app.separator}")
+    //@Value("${app.separator}")
     private String separator;
 }

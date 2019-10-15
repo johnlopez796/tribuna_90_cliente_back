@@ -1,5 +1,6 @@
 package com.cancha.cliente.validation.impl;
 
+import com.cancha.cliente.config.AppConfig;
 import com.cancha.cliente.repository.domain.Persona;
 import com.cancha.cliente.repository.domain.Usuario;
 import com.cancha.cliente.service.UsuarioService;
@@ -14,16 +15,24 @@ import java.util.Optional;
 public class UsuarioValidationImpl implements UsuarioValidation {
 
     private UsuarioService usuarioService;
+    private AppConfig appConfig;
 
-    public UsuarioValidationImpl(UsuarioService usuarioService) {
+    public UsuarioValidationImpl(UsuarioService usuarioService, AppConfig appConfig) {
         this.usuarioService = usuarioService;
+        this.appConfig = appConfig;
     }
 
     /**
      * @param usuario
      */
     public void validacionInicioSesion(Usuario usuario) throws RestException{
-
+        if(usuario.isBloqueado()){
+            throw new RestException(HttpStatus.LOCKED,"El usuario se encuentra bloqueado");
+        }else if(usuario.getIntentos() >= appConfig.getMaxIntentosIngreso()){
+            usuario.setBloqueado(true);
+            usuarioService.saveUsuario(usuario);
+            throw new RestException(HttpStatus.LOCKED,"El usuario se encuentra bloqueado");
+        }
     }
 
     /**

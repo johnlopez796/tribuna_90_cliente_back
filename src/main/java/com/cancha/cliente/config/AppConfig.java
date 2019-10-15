@@ -7,6 +7,6 @@ import org.springframework.stereotype.Component;
 @Component
 @Getter
 public class AppConfig {
-    //@Value("${app.separator}")
-    private String separator;
+    @Value("${app.ingreso.intentos}")
+    private Integer maxIntentosIngreso;
 }

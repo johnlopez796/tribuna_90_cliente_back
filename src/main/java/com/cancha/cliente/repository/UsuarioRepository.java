@@ -15,4 +15,6 @@ public interface UsuarioRepository extends MongoRepository<Usuario,String>{
     @Query("{ 'persona: {documento': ?0, 'tipoDocumento': ?1}}")
     Optional<Usuario> findByDocumentoAndTipoDocumento( String documento,
                                                        TipoDocumento tipoDocumento);
+
+    Optional<Usuario> findByNicknameAndPassword(String nickname, String password);
 }

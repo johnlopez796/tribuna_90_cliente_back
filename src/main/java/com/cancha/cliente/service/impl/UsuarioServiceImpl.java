@@ -37,4 +37,11 @@ public class UsuarioServiceImpl implements UsuarioService{
                                                    TipoDocumento tipoDocumento){
         return usuarioRepository.findByDocumentoAndTipoDocumento(documento,tipoDocumento);
     }
+
+    @Override
+    public Optional<Usuario> findByNicknameYPass(String nickname, String pass){
+        return usuarioRepository.findByNicknameAndPassword(nickname,pass);
+    }
+
+
 }

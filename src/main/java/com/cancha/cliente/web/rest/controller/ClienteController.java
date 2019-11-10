@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
 
-@Api(description = "Operaciones Vehiculos", tags = "Vehiculos")
+@Api(description = "Operaciones cliente tribuna 90", tags = "cliente")
 public interface ClienteController {
 
     @ApiOperation(value = "Registro de cliente", response = UsuarioDto.class, produces = MediaType.APPLICATION_JSON_UTF8_VALUE,

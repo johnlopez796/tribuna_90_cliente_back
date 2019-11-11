@@ -30,4 +30,10 @@ public class Establecimiento {
     private String horaApertura;
     private String horaCierre;
     private int numeroCanchas;
+
+    public Establecimiento(String id){
+        this.id = id;
+    }
+
+    public Establecimiento(){}
 }

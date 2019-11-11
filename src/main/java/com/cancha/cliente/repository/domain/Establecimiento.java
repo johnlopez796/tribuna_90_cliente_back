@@ -14,7 +14,7 @@ import java.util.Date;
 @Setter
 public class Establecimiento {
     @Id
-    private Integer id;
+    private String id;
     private String nombre;
     private String ubicacion;
     private Date endTime;
@@ -28,4 +28,5 @@ public class Establecimiento {
     private String longitud;
     private String horaApertura;
     private String horaCierre;
+    private int numeroCanchas;
 }

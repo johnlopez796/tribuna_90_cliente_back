@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -24,8 +25,8 @@ public class Establecimiento {
     private Persona lastModId;
     @DBRef
     private Date lasModUser;
-    private String latitud;
-    private String longitud;
+    private BigDecimal latitud;
+    private BigDecimal longitud;
     private String horaApertura;
     private String horaCierre;
     private int numeroCanchas;

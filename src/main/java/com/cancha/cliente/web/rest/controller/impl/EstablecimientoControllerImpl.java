@@ -3,11 +3,10 @@ package com.cancha.cliente.web.rest.controller.impl;
 import com.cancha.cliente.business.EstablecimientoBusiness;
 import com.cancha.cliente.dto.EstablecimientoDto;
 import com.cancha.cliente.dto.UsuarioDto;
+import com.cancha.cliente.repository.domain.Establecimiento;
+import org.springframework.data.geo.Point;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,10 +24,15 @@ public class EstablecimientoControllerImpl {
     @GetMapping("/{long}/{lat}")
     public ResponseEntity<List<EstablecimientoDto>> buscarEstablecimiento(
             @PathVariable("long")BigDecimal longitud,
-            @PathVariable("long")BigDecimal latitud
+            @PathVariable("lat")BigDecimal latitud
     ){
         return ResponseEntity.ok(establecimientoBusiness.buscarEstablecimientoPorCoordenada(
-                longitud,latitud
+              new Point(latitud.doubleValue(),longitud.doubleValue())
         ));
+    }
+
+    @PostMapping
+    public void guardarEstablecimiento(@RequestBody Establecimiento establecimiento){
+        this.establecimientoBusiness.saveEstablecimiento(establecimiento);
     }
 }

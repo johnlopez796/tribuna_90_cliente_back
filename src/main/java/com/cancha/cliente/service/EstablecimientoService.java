@@ -2,6 +2,8 @@ package com.cancha.cliente.service;
 
 
 import com.cancha.cliente.repository.domain.Establecimiento;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Point;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,6 +19,7 @@ public interface EstablecimientoService {
      * @param longMax
      * @return
      */
+    @Deprecated
     List<Establecimiento> findByPosicion(BigDecimal latMin, BigDecimal latMax, BigDecimal longMin,
                                           BigDecimal longMax);
 
@@ -26,4 +29,14 @@ public interface EstablecimientoService {
      * @return
      */
     Optional<Establecimiento> findById(String idEstablecimiento);
+
+    /**
+     *
+     * @param point
+     * @param distance
+     * @return
+     */
+    List<Establecimiento> findByPosicion(Point point, Distance distance);
+
+    void saveEstablecimiento(Establecimiento establecimiento);
 }

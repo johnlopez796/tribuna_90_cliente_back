@@ -1,6 +1,8 @@
 package com.cancha.cliente.repository;
 
 import com.cancha.cliente.repository.domain.Establecimiento;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -16,4 +18,6 @@ public interface EstablecimientoRepository extends CrudRepository<Establecimient
                                            BigDecimal longitudMax,
                                            BigDecimal latitudMin,
                                            BigDecimal latitudMax);
+
+    List<Establecimiento> findBylocationNear(Point point, Distance distance);
 }

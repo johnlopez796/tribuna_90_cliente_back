@@ -3,6 +3,8 @@ package com.cancha.cliente.service.impl;
 import com.cancha.cliente.repository.EstablecimientoRepository;
 import com.cancha.cliente.repository.domain.Establecimiento;
 import com.cancha.cliente.service.EstablecimientoService;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -18,6 +20,7 @@ public class EstablecimientoServiceImpl implements EstablecimientoService{
         this.establecimientoRepository = establecimientoRepository;
     }
 
+    @Deprecated
     @Override
     public List<Establecimiento> findByPosicion(BigDecimal latMin, BigDecimal latMax, BigDecimal longMin,
                                                 BigDecimal longMax){
@@ -27,5 +30,14 @@ public class EstablecimientoServiceImpl implements EstablecimientoService{
     @Override
     public Optional<Establecimiento> findById(String idEstablecimiento){
         return establecimientoRepository.findById(idEstablecimiento);
+    }
+
+    @Override
+    public List<Establecimiento> findByPosicion(Point point, Distance distance){
+        return establecimientoRepository.findBylocationNear(point,distance);
+    }
+
+    public void saveEstablecimiento(Establecimiento establecimiento){
+        establecimientoRepository.save(establecimiento);
     }
 }

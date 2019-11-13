@@ -8,7 +8,9 @@ import java.math.BigDecimal;
 public class CoordenadasUtil {
 
     public BigDecimal coordMax(BigDecimal coord, BigDecimal distKm){
+        distKm = coord.setScale(6,BigDecimal.ROUND_HALF_UP);
         coord = coord.add(distKm);
+        coord = coord.setScale(6,BigDecimal.ROUND_HALF_UP);
         return coord;
     }
 

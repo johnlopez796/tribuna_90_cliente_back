@@ -1,16 +1,20 @@
 package com.cancha.cliente.repository.domain;
 
 
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.geo.Point;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexType;
+import org.springframework.data.mongodb.core.index.GeoSpatialIndexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.math.BigDecimal;
+
 import java.util.Date;
 
-@Data
+@Document
 @Getter
 @Setter
 public class Establecimiento {
@@ -20,13 +24,13 @@ public class Establecimiento {
     private String ubicacion;
     private Date endTime;
     @DBRef
-    private Persona createUserId;
+    private Usuario createUserId;
     private Date createDate;
-    private Persona lastModId;
+    private Usuario lastModId;
     @DBRef
-    private Date lasModUser;
-    private BigDecimal latitud;
-    private BigDecimal longitud;
+    private Usuario lasModUser;
+    @GeoSpatialIndexed(type = GeoSpatialIndexType.GEO_2D)
+    private Point location;
     private String horaApertura;
     private String horaCierre;
     private int numeroCanchas;

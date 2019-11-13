@@ -6,9 +6,14 @@ import com.cancha.cliente.dto.EstablecimientoDto;
 import com.cancha.cliente.map.CanchaMapper;
 import com.cancha.cliente.map.EstablecimientoMapper;
 import com.cancha.cliente.repository.domain.Cancha;
+import com.cancha.cliente.repository.domain.Establecimiento;
 import com.cancha.cliente.service.CanchaService;
 import com.cancha.cliente.service.EstablecimientoService;
 import com.cancha.cliente.util.CoordenadasUtil;
+import org.springframework.data.geo.Distance;
+import org.springframework.data.geo.Metric;
+import org.springframework.data.geo.Metrics;
+import org.springframework.data.geo.Point;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -33,22 +38,24 @@ public class EstablecimientoBusinessImpl implements EstablecimientoBusiness {
     }
 
     public List<EstablecimientoDto> buscarEstablecimientoPorCoordenada(
-            BigDecimal longitud, BigDecimal latitud
+            Point point
     ) {
-        BigDecimal longMax = coordenadasUtil.coordMax(longitud, BigDecimal.valueOf(10));
-        BigDecimal latMax = coordenadasUtil.coordMax(longitud, BigDecimal.valueOf(10));
-        BigDecimal longMin = coordenadasUtil.coordMin(longitud, BigDecimal.valueOf(10));
-        BigDecimal latMin = coordenadasUtil.coordMin(longitud, BigDecimal.valueOf(10));
+
+        Distance distance = new Distance(5, Metrics.KILOMETERS);
 
         List<EstablecimientoDto> establecimientoList =
-                establecimientoMapper.toEstablecimientoDtoList(establecimientoService.findByPosicion(latMin, latMax, longMin, longMax));
-
+                establecimientoMapper.toEstablecimientoDtoList(establecimientoService.findByPosicion(point,distance));
+        /*
         for (int i = 0; i < establecimientoList.size(); i++) {
             List<CanchaDto> canchas = canchaMapper.toCanchaDtoList(canchaService.findByEstablecimiento(establecimientoList.get(i).getId()));
             establecimientoList.get(i).setCanchas(canchas);
             establecimientoList.get(i).setNumeroCanchas(canchas.size());
-        }
+        }*/
 
         return establecimientoList;
+    }
+
+    public void saveEstablecimiento(Establecimiento establecimiento){
+        establecimientoService.saveEstablecimiento(establecimiento);
     }
 }

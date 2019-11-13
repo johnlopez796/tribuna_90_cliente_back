@@ -16,7 +16,7 @@ public class Reserva {
     private String idReserva;
     private Date fechaReserva;
     @DBRef
-    private Persona persona;
+    private Usuario usuario;
     @DBRef
     private Cancha cancha;
 

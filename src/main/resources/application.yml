@@ -17,3 +17,7 @@ eureka:
 app:
   ingreso:
     intentos: 3
+
+logging:
+  level:
+    root: INFO

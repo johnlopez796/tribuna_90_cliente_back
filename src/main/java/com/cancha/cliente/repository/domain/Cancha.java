@@ -22,9 +22,9 @@ public class Cancha {
     private Establecimiento establecimiento;
     private String tipoTecho;
     private Date createDate;
-    @DBRef
+    //@DBRef
     private Persona lastModUserId;
     private Date lastModDate;
-    @DBRef
+   // @DBRef
     private Tarifa tarifa;
 }

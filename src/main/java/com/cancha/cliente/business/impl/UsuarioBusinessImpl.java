@@ -11,8 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
-import java.util.Optional;
+import java.util.*;
 
 /**
  *
@@ -41,7 +40,11 @@ public class UsuarioBusinessImpl implements UsuarioBusiness{
         usuario.setFechaCreacion(new Date());
         usuario.setIntentos(0);
         usuario = usuarioService.saveUsuario(usuario);
-        return usuarioMapper.toUsuario(usuario);
+        List<String> rol = new ArrayList<>();
+        rol.add("cliente");
+        UsuarioDto usuarioDtoR = usuarioMapper.toUsuario(usuario);
+        usuarioDto.setRol(rol);
+        return usuarioDtoR;
     }
 
     public UsuarioDto validarIngreso(String nickname, String password)throws RestException{
@@ -52,7 +55,11 @@ public class UsuarioBusinessImpl implements UsuarioBusiness{
                 usuario.get().setIntentos(0);
                 usuario.get().setUltimoIngreso(new Date());
                 usuarioService.saveUsuario(usuario.get());
-                return usuarioMapper.toUsuario(usuario.get());
+                UsuarioDto usuarioDtoR = usuarioMapper.toUsuario(usuario.get());
+                List<String> rol = new ArrayList<>();
+                rol.add("cliente");
+                usuarioDtoR.setRol(rol);
+                return usuarioDtoR;
             }else {
                 usuario.get().setIntentos(usuario.get().getIntentos()+1);
                 usuarioService.saveUsuario(usuario.get());

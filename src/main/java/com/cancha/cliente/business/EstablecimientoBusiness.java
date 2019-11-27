@@ -19,5 +19,17 @@ public interface EstablecimientoBusiness {
             Point point
     );
 
+    /**
+     *
+     * @param establecimiento
+     */
     void saveEstablecimiento(Establecimiento establecimiento);
+
+    /**
+     *
+     * @param idEstablecimiento
+     * @return
+     */
+    EstablecimientoDto buscarEstablecimiento(String idEstablecimiento);
+
 }

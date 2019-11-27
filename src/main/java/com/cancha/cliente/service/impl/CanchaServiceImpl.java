@@ -21,4 +21,9 @@ public class CanchaServiceImpl implements CanchaService{
     public List<Cancha> findByEstablecimiento(String idEstablecimiento){
         return canchaRepository.findByEstablecimiento(new Establecimiento(idEstablecimiento));
     }
+
+    @Override
+    public Cancha saveCancha(Cancha cancha){
+        return canchaRepository.save(cancha);
+    }
 }

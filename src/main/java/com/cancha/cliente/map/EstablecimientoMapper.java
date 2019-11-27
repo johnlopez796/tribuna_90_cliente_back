@@ -9,7 +9,7 @@ import org.mapstruct.Mappings;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring", config = MapStructConfig.class)
+@Mapper(componentModel = "spring", config = MapStructConfig.class, uses = CanchaMapper.class)
 public abstract class EstablecimientoMapper {
 
 

@@ -21,4 +21,9 @@ public class Usuario {
     private Date fechaCreacion;
     private Date ultimoIngreso;
     private Persona persona;
+
+    public Usuario(){}
+    public Usuario(String id){
+        this.id = id;
+    }
 }

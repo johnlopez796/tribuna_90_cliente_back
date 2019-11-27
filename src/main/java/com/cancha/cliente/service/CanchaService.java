@@ -8,4 +8,6 @@ import java.util.List;
 public interface CanchaService {
 
     List<Cancha> findByEstablecimiento(String idEstablecimiento);
+
+    Cancha saveCancha(Cancha cancha);
 }

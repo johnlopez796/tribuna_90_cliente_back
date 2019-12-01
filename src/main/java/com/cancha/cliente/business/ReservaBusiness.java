@@ -19,4 +19,6 @@ public interface ReservaBusiness {
 
     List<HorarioDisponibleDto> generarHorarioCancha(CanchaDto canchaDto, EstablecimientoDto establecimientoDto,
                                                     List<Reserva> reserva, Date fechaIni, Date fechaFin);
+
+    String crearReserva(String idCancha, Date fechaReserva);
 }

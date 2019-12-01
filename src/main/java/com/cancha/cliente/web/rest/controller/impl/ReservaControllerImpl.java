@@ -3,12 +3,11 @@ package com.cancha.cliente.web.rest.controller.impl;
 import com.cancha.cliente.business.ReservaBusiness;
 import com.cancha.cliente.dto.HorarioDisponibleDto;
 import com.cancha.cliente.web.rest.controller.ReservaController;
+import com.cancha.cliente.web.rest.controller.model.ReservaRequestDto;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -30,5 +29,10 @@ public class ReservaControllerImpl implements ReservaController {
             @RequestParam("fechaIni") @DateTimeFormat(pattern = "yyyy-MM-dd-HH") Date fechaIni,
             @RequestParam("fechaFin") @DateTimeFormat(pattern = "yyyy-MM-dd-HH") Date fechaFin) {
         return reservaBusiness.generarDisponibilidad(fechaIni, fechaFin, idEstablecimiento);
+    }
+
+    @PostMapping(produces = MediaType.TEXT_PLAIN_VALUE)
+    public String  generarReserva(@RequestBody ReservaRequestDto reservaRequestDto){
+        return reservaBusiness.crearReserva(reservaRequestDto.getIdCancha(),reservaRequestDto.getFechaReserva());
     }
 }

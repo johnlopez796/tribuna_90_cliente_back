@@ -15,4 +15,6 @@ public interface ReservaService {
     List<Reserva> reservaPorFecha(Date fechaInicial, Date fechaFinal);
 
     List<Reserva> reservaPorFechaEstablecimiento(Date fechaInicial, Date fechaFinal, Establecimiento establecimiento);
+
+    Reserva guardar(Reserva reserva);
 }

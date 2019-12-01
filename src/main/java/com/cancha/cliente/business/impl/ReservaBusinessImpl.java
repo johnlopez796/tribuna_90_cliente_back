@@ -106,7 +106,7 @@ public class ReservaBusinessImpl implements ReservaBusiness {
     }
 
     public String crearReserva(String idCancha, Date fechaReserva){
-        ReservaDto reservaDto = new ReservaDto();
+            ReservaDto reservaDto = new ReservaDto();
         reservaDto.setCancha(new CanchaDto());
         reservaDto.getCancha().setId(idCancha);
         reservaDto.setFechaReserva(fechaReserva);

@@ -24,13 +24,13 @@ public class ClienteControllerImpl implements ClienteController {
         this.usuarioBusiness = usuarioBusiness;
     }
 
-    @PostMapping
+    @PostMapping("/registro")
     @Override
     public ResponseEntity<UsuarioDto> registrarUsuario(@RequestBody UsuarioDto usuarioDto) {
         return ResponseEntity.ok(usuarioBusiness.registrarUsuario(usuarioDto));
     }
 
-    @PostMapping("/ingreso")
+    @PostMapping
     @Override
     public ResponseEntity<UsuarioDto> validarIngreso(@RequestBody IngresoRequest ingresoRq) {
         return ResponseEntity.ok(usuarioBusiness.validarIngreso(ingresoRq.getNickName(),ingresoRq.getPassword()));

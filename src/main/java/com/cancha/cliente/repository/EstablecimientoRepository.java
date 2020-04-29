@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EstablecimientoRepository extends CrudRepository<Establecimiento,String>{
@@ -20,4 +21,8 @@ public interface EstablecimientoRepository extends CrudRepository<Establecimient
                                            BigDecimal latitudMax);
 
     List<Establecimiento> findBylocationNear(Point point, Distance distance);
+
+    List<Establecimiento> findBylocation(Point point);
+
+    Establecimiento findBynombre(String nombre);
 }

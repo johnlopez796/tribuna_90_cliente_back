@@ -34,17 +34,26 @@ public class UsuarioBusinessImpl implements UsuarioBusiness{
      * @return
      */
     public UsuarioDto registrarUsuario(UsuarioDto usuarioDto)throws RestException {
-        Usuario usuario = usuarioMapper.toUsuarioDto(usuarioDto);
-        usuarioValidation.validacionInicioSesion(usuario);
-        usuario.setBloqueado(false);
-        usuario.setFechaCreacion(new Date());
-        usuario.setIntentos(0);
-        usuario = usuarioService.saveUsuario(usuario);
-        List<String> rol = new ArrayList<>();
-        rol.add("cliente");
-        UsuarioDto usuarioDtoR = usuarioMapper.toUsuario(usuario);
-        usuarioDto.setRol(rol);
-        return usuarioDtoR;
+        Optional<Usuario> usuarioOld = usuarioService.findByNickName(usuarioDto.getNickname());
+
+        if (!usuarioOld.isPresent()){
+
+            Usuario usuario = usuarioMapper.toUsuarioDto(usuarioDto);
+            usuarioValidation.validacionInicioSesion(usuario);
+            usuario.setId(usuarioDto.getDocumento());
+            usuario.setBloqueado(false);
+            usuario.setFechaCreacion(new Date());
+            usuario.setIntentos(0);
+            usuario = usuarioService.saveUsuario(usuario);
+            List<String> rol = new ArrayList<>();
+            rol.add("cliente");
+            UsuarioDto usuarioDtoR = usuarioMapper.toUsuario(usuario);
+            usuarioDto.setRol(rol);
+            return usuarioDtoR;
+        } else {
+            throw new RestException(HttpStatus.UNAUTHORIZED,"Usuario ya existe en plataforma");
+        }
+
     }
 
     public UsuarioDto validarIngreso(String nickname, String password)throws RestException{
@@ -57,6 +66,7 @@ public class UsuarioBusinessImpl implements UsuarioBusiness{
                 usuarioService.saveUsuario(usuario.get());
                 UsuarioDto usuarioDtoR = usuarioMapper.toUsuario(usuario.get());
                 List<String> rol = new ArrayList<>();
+                usuarioDtoR.setToken(String.valueOf(Math.random()*20));
                 rol.add("cliente");
                 usuarioDtoR.setRol(rol);
                 return usuarioDtoR;
@@ -66,7 +76,7 @@ public class UsuarioBusinessImpl implements UsuarioBusiness{
                 throw new RestException(HttpStatus.UNAUTHORIZED,"Usuario y/o contraseña invalidos");
             }
         }else{
-            throw new RestException(HttpStatus.UNAUTHORIZED,"Usuario y/o contraseña invalidos");
+            throw new RestException(HttpStatus.UNAUTHORIZED,"Usuario no registrado");
         }
     }
 }

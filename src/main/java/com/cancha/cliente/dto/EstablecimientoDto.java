@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class EstablecimientoDto {
+public class EstablecimientoDto<E> {
     private String id;
     private String nombre;
     private String ubicacion;
@@ -20,4 +20,16 @@ public class EstablecimientoDto {
     private Point location;
     private int numeroCanchas;
     private List<CanchaDto> canchas;
+
+    public void setNumeroCanchas(int numeroCanchas) {
+        this.numeroCanchas = numeroCanchas;
+    }
+
+    public void setCanchas(List<CanchaDto> canchas) {
+        this.canchas = canchas;
+    }
+
+    public String getId() {
+        return id;
+    }
 }

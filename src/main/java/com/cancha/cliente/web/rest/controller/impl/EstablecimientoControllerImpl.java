@@ -2,7 +2,6 @@ package com.cancha.cliente.web.rest.controller.impl;
 
 import com.cancha.cliente.business.EstablecimientoBusiness;
 import com.cancha.cliente.dto.EstablecimientoDto;
-import com.cancha.cliente.dto.UsuarioDto;
 import com.cancha.cliente.repository.domain.Establecimiento;
 import org.springframework.data.geo.Point;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +29,13 @@ public class EstablecimientoControllerImpl {
               new Point(latitud.doubleValue(),longitud.doubleValue())
         ));
     }
+
+//    @GetMapping("/{nombre}")
+//    public ResponseEntity<List<EstablecimientoDto>> buscarEstablecimiento(
+//            @PathVariable("nombre")String nombreEstablecimiento
+//    ){
+//        return ResponseEntity.ok(establecimientoBusiness.buscarEstablecimientoPorNombre(nombreEstablecimiento));
+//    }
 
     @PostMapping
     public void guardarEstablecimiento(@RequestBody Establecimiento establecimiento){

@@ -36,7 +36,23 @@ public interface EstablecimientoService {
      * @param distance
      * @return
      */
-    List<Establecimiento> findByPosicion(Point point, Distance distance);
+    List<Establecimiento> findByPosicionNear(Point point, Distance distance);
+
+    /**
+     *
+     * @param point
+     * @return
+     */
+    List<Establecimiento> findBylocation(Point point);
+
+    /**
+     *
+     * @param nombre
+     * @return
+     */
+    Establecimiento findBynombre(String nombre);
+
+
 
     void saveEstablecimiento(Establecimiento establecimiento);
 }

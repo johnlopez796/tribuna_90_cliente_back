@@ -43,7 +43,11 @@ public class EstablecimientoBusinessImpl implements EstablecimientoBusiness {
         Distance distance = new Distance(5, Metrics.KILOMETERS);
 
         List<EstablecimientoDto> establecimientoList =
-                establecimientoMapper.toEstablecimientoDtoList(establecimientoService.findByPosicion(point, distance));
+                establecimientoMapper.toEstablecimientoDtoList(establecimientoService.findBylocation(point));
+
+
+//        List<EstablecimientoDto> establecimientoList =
+//                establecimientoMapper.toEstablecimientoDtoList(establecimientoService.findByPosicionNear(point, distance));
 
         for (int i = 0; i < establecimientoList.size(); i++) {
             List<CanchaDto> canchas = canchaMapper.toCanchaDtoList(canchaService.findByEstablecimiento(establecimientoList.get(i).getId()));
@@ -54,12 +58,13 @@ public class EstablecimientoBusinessImpl implements EstablecimientoBusiness {
         return establecimientoList;
     }
 
+
     public void saveEstablecimiento(Establecimiento establecimiento) {
         establecimientoService.saveEstablecimiento(establecimiento);
     }
 
     public EstablecimientoDto buscarEstablecimiento(String idEstablecimiento) {
-        EstablecimientoDto establecimientoDto = establecimientoMapper.toEstablecimientoDto(establecimientoService
+        EstablecimientoDto establecimientoDto = establecimientoMapper.EstablecimientoDtotoEstablecimientoDto(establecimientoService
                 .findById(idEstablecimiento)
                 .orElseThrow(() -> new RestException(HttpStatus.NOT_FOUND, "No existe el establecimiento"))
         );
@@ -70,4 +75,18 @@ public class EstablecimientoBusinessImpl implements EstablecimientoBusiness {
 
         return establecimientoDto;
     }
+
+    public EstablecimientoDto  buscarEstablecimientoPorNombre(String nombreEstablecimiento) {
+        EstablecimientoDto establecimientoDto = establecimientoMapper.EstablecimientoDtotoEstablecimientoDto(establecimientoService.findBynombre(nombreEstablecimiento));
+
+        List<CanchaDto> canchas = canchaMapper.toCanchaDtoList(canchaService.findByEstablecimiento(establecimientoDto.getId()));
+        establecimientoDto.setCanchas(canchas);
+        establecimientoDto.setNumeroCanchas(canchas.size());
+
+        return establecimientoDto;
+    }
+
+
+
+
 }

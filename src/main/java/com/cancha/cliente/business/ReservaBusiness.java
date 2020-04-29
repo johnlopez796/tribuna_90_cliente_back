@@ -5,7 +5,6 @@ import com.cancha.cliente.dto.EstablecimientoDto;
 import com.cancha.cliente.dto.HorarioDisponibleDto;
 import com.cancha.cliente.dto.ReservaBasicDto;
 import com.cancha.cliente.repository.domain.Reserva;
-import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;

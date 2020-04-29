@@ -33,9 +33,20 @@ public class EstablecimientoServiceImpl implements EstablecimientoService{
     }
 
     @Override
-    public List<Establecimiento> findByPosicion(Point point, Distance distance){
+    public List<Establecimiento> findByPosicionNear(Point point, Distance distance){
         return establecimientoRepository.findBylocationNear(point,distance);
     }
+
+    @Override
+    public List<Establecimiento> findBylocation(Point point) {
+        return establecimientoRepository.findBylocation(point);
+    }
+
+    @Override
+    public Establecimiento findBynombre(String nombre) {
+        return establecimientoRepository.findBynombre(nombre);
+    }
+
 
     public void saveEstablecimiento(Establecimiento establecimiento){
         establecimientoRepository.save(establecimiento);

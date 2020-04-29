@@ -17,6 +17,7 @@ public class UsuarioDto {
     private String documento;
     @NotEmpty
     private String nombres;
+    private String token;
     @NotEmpty
     private String apellidos;
     private Date fechaNacimiento;
@@ -27,4 +28,24 @@ public class UsuarioDto {
     private String email;
     private String clave;
     private List<String> rol;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public String getDocumento() {
+        return documento;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }
